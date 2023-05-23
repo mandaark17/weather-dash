@@ -24,7 +24,7 @@ function getWeather(city) {
   currentWeather.innerHTML = '';
   forecast.innerHTML = '';
 
-  // Fetch current weather data
+  // Fetch current weather data, with error catch
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then(data => {
@@ -35,7 +35,7 @@ function getWeather(city) {
       console.log('Error:', error);
     });
 
-  // Fetch forecast data
+  // Fetch forecast data, with error catch
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then(data => {
@@ -60,11 +60,11 @@ function displayCurrentWeather(data) {
 
   currentWeatherCard.innerHTML = `
     <h2>${cityName}</h2>
-    <p>Date: ${date}</p>
+    <h2>${date}</h2>
     <img src="${iconUrl}" alt="Weather Icon">
-    <p>Temperature: ${temperature}°C</p>
+    <p>Temp: ${temperature}&deg;C</p>
     <p>Humidity: ${humidity}%</p>
-    <p>Wind Speed: ${windSpeed} m/s</p>
+    <p>Wind: ${windSpeed} m/s</p>
   `;
 
   currentWeather.appendChild(currentWeatherCard);
@@ -87,9 +87,9 @@ function displayForecast(data) {
     forecastCard.innerHTML = `
       <h2>${date}</h2>
       <img src="${iconUrl}" alt="Weather Icon">
-      <p>Temperature: ${temperature}°C</p>
+      <p>Temp: ${temperature}&deg;C</p>
       <p>Humidity: ${humidity}%</p>
-      <p>Wind Speed: ${windSpeed} m/s</p>
+      <p>Wind: ${windSpeed} m/s</p>
     `;
 
     forecast.appendChild(forecastCard);
