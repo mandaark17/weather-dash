@@ -30,17 +30,56 @@
     padding: 10px;
     margin: 10px;
     border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .weather-card h2 {
     margin: 0;
+    font-size: 18px;
   }
   
   .weather-card img {
     width: 50px;
+    margin-bottom: 10px;
   }
   
   .weather-card p {
     margin: 5px 0;
+  }
+  
+  #search-history p {
+    cursor: pointer;
+  }
+  
+  #search-history p:hover {
+    text-decoration: underline;
+  }
+  
+  input[type="text"],
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  input[type="text"] {
+    width: 200px;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border: 1px solid #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
   }
   
