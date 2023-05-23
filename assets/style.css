@@ -1,0 +1,46 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-top: 30px;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  #search-history {
+    margin-top: 30px;
+  }
+  
+  #current-weather {
+    margin-top: 30px;
+  }
+  
+  #forecast {
+    margin-top: 30px;
+  }
+  
+  .weather-card {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .weather-card h2 {
+    margin: 0;
+  }
+  
+  .weather-card img {
+    width: 50px;
+  }
+  
+  .weather-card p {
+    margin: 5px 0;
+  }
+  
