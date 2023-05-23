@@ -1,4 +1,5 @@
-const apiKey = '7037c3a8356a3e1fc5718593686540cf'; // I wanted to make aname but was scared lol
+// I wanted to make a default name but was I scared lol
+const apiKey = '7037c3a8356a3e1fc5718593686540cf'; 
 
 // Html elements
 const searchForm = document.getElementById('search-form');
@@ -7,6 +8,7 @@ const searchHistory = document.getElementById('search-history');
 const currentWeather = document.getElementById('current-weather');
 const forecast = document.getElementById('forecast');
 
+// Recieve input city value
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const city = cityInput.value.trim();
@@ -16,6 +18,7 @@ searchForm.addEventListener('submit', function(event) {
   }
 });
 
+// Fetch all info from OpenWeather API
 function getWeather(city) {
   // Clear previous data
   currentWeather.innerHTML = '';
@@ -43,3 +46,62 @@ function getWeather(city) {
     });
 }
 
+// Display searched city
+function displayCurrentWeather(data) {
+  const cityName = data.name;
+  const date = new Date(data.dt * 1000).toLocaleDateString();
+  const iconUrl = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+  const temperature = data.main.temp;
+  const humidity = data.main.humidity;
+  const windSpeed = data.wind.speed;
+
+  const currentWeatherCard = document.createElement('div');
+  currentWeatherCard.classList.add('weather-card');
+
+  currentWeatherCard.innerHTML = `
+    <h2>${cityName}</h2>
+    <p>Date: ${date}</p>
+    <img src="${iconUrl}" alt="Weather Icon">
+    <p>Temperature: ${temperature}°C</p>
+    <p>Humidity: ${humidity}%</p>
+    <p>Wind Speed: ${windSpeed} m/s</p>
+  `;
+
+  currentWeather.appendChild(currentWeatherCard);
+}
+
+// Display a 5 day forecast
+function displayForecast(data) {
+  const forecastData = data.list.filter(item => item.dt_txt.includes('12:00:00'));
+  
+  forecastData.forEach(item => {
+    const date = new Date(item.dt * 1000).toLocaleDateString();
+    const iconUrl = `https://openweathermap.org/img/w/${item.weather[0].icon}.png`;
+    const temperature = item.main.temp;
+    const humidity = item.main.humidity;
+    const windSpeed = item.wind.speed;
+
+    const forecastCard = document.createElement('div');
+    forecastCard.classList.add('weather-card');
+
+    forecastCard.innerHTML = `
+      <h2>${date}</h2>
+      <img src="${iconUrl}" alt="Weather Icon">
+      <p>Temperature: ${temperature}°C</p>
+      <p>Humidity: ${humidity}%</p>
+      <p>Wind Speed: ${windSpeed} m/s</p>
+    `;
+
+    forecast.appendChild(forecastCard);
+  });
+}
+
+function saveSearchHistory(city) {
+  const searchItem = document.createElement('p');
+  searchItem.textContent = city;
+  searchHistory.appendChild(searchItem);
+  
+  searchItem.addEventListener('click', function() {
+    getWeather(city);
+  });
+}
